@@ -7,8 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <p><%= JSON.stringify(data) %></p>
+    <!-- <p><%= JSON.stringify(data) %></p> -->
     <input type="hidden" name="weather" id="weather" value="<%= JSON.stringify(data) %>">
+    <input type="hidden" name="config" id="config" value="<%= JSON.stringify(config) %>">
 
 
     <div>
@@ -37,6 +38,10 @@
           }]
         };
       
+        const configElement = document.getElementById('config').value;
+
+        console.error(configElement)
+        
         const config = {
           type: 'line',
           data: d,
@@ -45,8 +50,8 @@
 
         const myChart = new Chart(
             document.getElementById('myChart'),
-            config
-          );
+            JSON.parse(configElement)
+            );
       </script>
 
     <script>
