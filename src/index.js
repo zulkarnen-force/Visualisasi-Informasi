@@ -15,6 +15,7 @@ const TwitterService = require('./Services/TwitterServices');
 const Twitter = require('./Classes/Twitter');
 const { resolveObjectURL } = require('buffer');
 
+const env = require('dotenv').config()
 
 
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -120,5 +121,5 @@ app.get('/trends/today', async (req, res) => {
     res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(config)})
 })
 
-app.listen(PORT)
+app.listen(process.env.PORT)
 
