@@ -10,8 +10,20 @@
     <!-- <p><%= JSON.stringify(data) %></p> -->
     <input type="hidden" name="weather" id="weather" value="<%= JSON.stringify(data) %>">
     <input type="hidden" name="config" id="config" value="<%= JSON.stringify(config) %>">
+    
 
+    <form action="/weather" method="get">
+      <input type="text" name="city">
+      <button class="btn btn-success">apply</button>
+    </form>
+    <style>
+      canvas{
 
+        width:1000px !important;
+        height:600px !important;
+      
+      }
+    </style>
     <div>
         <canvas id="myChart"></canvas>
     </div>
@@ -59,5 +71,7 @@
         const data = JSON.parse(weather.value);
         console.log(data)
     </script>
+
+
 </body>
 </html>
