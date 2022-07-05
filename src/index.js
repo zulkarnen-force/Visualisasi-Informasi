@@ -7,10 +7,13 @@ const path = require('path');
 const { send } = require('process');
 const fs = require('fs');
 const { verify } = require('crypto');
-const { json } = require('express');
+const { json, query } = require('express');
 const { render } = require('ejs');
-const WeatherServices = require('./WeatherService');
-const Weather = require('./views/Weather');
+const WeatherServices = require('./Services/WeatherService');
+const Weather = require('./Classes/Weather');
+const TwitterService = require('./Services/TwitterServices');
+const Twitter = require('./Classes/Twitter');
+const { resolveObjectURL } = require('buffer');
 
 
 
@@ -78,6 +81,44 @@ app.get('/', async (req, res) => {
 })
 
 
+app.get('/weather', async (req, res) => {
+    const city = req.query.city 
+    const weatherService = new WeatherServices();
+    const result = await weatherService.getByCity(city);
+    const weather = new Weather(result);
+    res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
+})
+
+app.get('/current', async (req, res) => {
+    const city = req.query.city
+    const services = new WeatherServices();
+    const current = await services.currentCondition(city);
+    const weather = new Weather(current);
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes();
+    res.render('current', {'current': JSON.stringify(weather.getCurrent()), city, time});
+})
+
+
+app.get('/trends', async (req, res) => {
+    const services = new TwitterService();
+    const datas = await services.sendRequest();
+    const twitter = new Twitter(datas);
+    const trendFresh = twitter.getNewTren()
+    // console.log(twitter.toConfigAble(trendFresh.data));
+    res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(twitter.getConfig())})
+})
+
+
+app.get('/trends/today', async (req, res) => {
+    const services = new TwitterService();
+    const datas = await services.sendRequest();
+    const twitter = new Twitter(datas);
+    const trendFresh = twitter.getNewTren();
+    const config = twitter.getConfigTrend(trendFresh.data);
+    console.log(`Config ${config}`)
+    res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(config)})
+})
 
 app.listen(PORT)
 
