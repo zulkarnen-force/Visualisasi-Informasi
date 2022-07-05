@@ -1,4 +1,5 @@
 const axios = require("axios").default;
+require('dotenv').config();
 
 class WeatherServices {
 
@@ -9,16 +10,16 @@ class WeatherServices {
     
     async getByCity(city) {
         try {
-            const datas = await axios.get(`https://wttr.in/${city}?format=j1`);
+            const datas = await axios.get(`${process.env.BASE_URL}${city}?format=j1`);
             return datas.data;
         } catch (err) {
             return err;
         }
     }
 
-    async currentCondition(city) {
+    async currentCondition(city = 'Bantul') {
         try {
-            const datas = await axios.get(`https://wttr.in/${city}?format=j1&lang=id`);
+            const datas = await axios.get(`${process.env.BASE_URL}${city}?format=j1&lang=id`);
             return datas.data;
         } catch (err) {
             return err;

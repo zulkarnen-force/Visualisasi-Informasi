@@ -1,26 +1,27 @@
 class Weather {
     constructor (properties) {
+
         let {current_condition, nearest_area, request, weather} = properties;
         this.weather = weather;
         this.currentCondition = current_condition;
+        
     }
+
+
 
     getWeather() {
         return this.weather;
+        
     }
 
     getCurrent() {
+        console.log(this.currentCondition)
         return this.currentCondition;
     }
 
 
-   
-
-
-
-
     getCelciusHours () {
-        const stages = this.getHourly();
+        const stages = this.getHourly();;
         let celciusPerDay = [];
         for (const stage of stages) {
             for (const s of stage) {
