@@ -19,15 +19,16 @@ app.get('/', async (req, res) => {
     // const result = await weatherService.getByCity('Bantul');
     // const weather = new Weather(result);
     // res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
+    return res.json({"json":"json"})
 })
 
 
 app.get('/weather', async (req, res) => {
-    const city = req.query.city 
-    const weatherService = new WeatherServices();
-    const result = await weatherService.getByCity(city);
-    const weather = new Weather(result);
-    res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
+    // const city = req.query.city 
+    // const weatherService = new WeatherServices();
+    // const result = await weatherService.getByCity(city);
+    // const weather = new Weather(result);
+    // res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
 })
 
 app.get('/current', async (req, res) => {
@@ -46,7 +47,6 @@ app.get('/trends', async (req, res) => {
     const datas = await services.sendRequest();
     const twitter = new Twitter(datas);
     const trendFresh = twitter.getNewTren()
-    // console.log(twitter.toConfigAble(trendFresh.data));
     res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(twitter.getConfig())})
 })
 
@@ -63,4 +63,4 @@ app.get('/trends/today', async (req, res) => {
     res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(config)})
 })
 
-app.listen(process.env.PORT)
+app.listen(process.env.PORT, () => console.log('listen on'))
