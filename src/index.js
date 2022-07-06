@@ -19,16 +19,17 @@ app.get('/', async (req, res) => {
     // const result = await weatherService.getByCity('Bantul');
     // const weather = new Weather(result);
     // res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
-    return res.json({"json":"json"})
+    res.render('welcome')
+    // return res.json({"json":"json"})
 })
 
 
 app.get('/weather', async (req, res) => {
-    // const city = req.query.city 
-    // const weatherService = new WeatherServices();
-    // const result = await weatherService.getByCity(city);
-    // const weather = new Weather(result);
-    // res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
+    const city = req.query.city 
+    const weatherService = new WeatherServices();
+    const result = await weatherService.getByCity(city);
+    const weather = new Weather(result);
+    res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
 })
 
 app.get('/current', async (req, res) => {
