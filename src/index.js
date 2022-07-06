@@ -15,10 +15,10 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', async (req, res) => {
-    const weatherService = new WeatherServices();
-    const result = await weatherService.getByCity('Bantul');
-    const weather = new Weather(result);
-    res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
+    // const weatherService = new WeatherServices();
+    // const result = await weatherService.getByCity('Bantul');
+    // const weather = new Weather(result);
+    // res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
 })
 
 
