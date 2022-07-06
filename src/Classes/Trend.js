@@ -9,11 +9,11 @@ class Trend {
         this.trends = this.data.trends;   
     }
 
-    _getTrends() {
+    #getTrends() {
         return this.trends;
     }
 
-    _toNumber(stringValue = ''){
+    #toNumber(stringValue = ''){
         if (stringValue.length === 0) {
             return 0;
         }
@@ -21,8 +21,8 @@ class Trend {
         return parseInt(stringValue.slice(0, -1));
     }
 
-    _getTrendingAndCount() {
-        const trends = this._getTrends();
+    #getTrendingAndCount() {
+        const trends = this.#getTrends();
         const tweets = [];
         const counts = [];
 
@@ -40,9 +40,9 @@ class Trend {
     }
 
 
-    _getConfigData() {
+    #getConfigData() {
        
-        const { tweets, counts: countTweets } = this._getTrendingAndCount();
+        const { tweets, counts: countTweets } = this.#getTrendingAndCount();
         return  {
             labels: tweets,
             datasets: [{
@@ -63,7 +63,7 @@ class Trend {
         
         return {
             type: 'doughnut',
-            data: this._getConfigData(),
+            data: this.#getConfigData(),
         }
 
     };
