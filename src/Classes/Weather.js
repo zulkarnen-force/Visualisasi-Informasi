@@ -4,10 +4,8 @@ class Weather {
         let {current_condition, nearest_area, request, weather} = properties;
         this.weather = weather;
         this.currentCondition = current_condition;
-        
+
     }
-
-
 
     getWeather() {
         return this.weather;

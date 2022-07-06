@@ -1,9 +1,9 @@
 class Twitter {
 
-    constructor (properties) {
-        const {status, data} = properties;
+    constructor (properties = Twitter) {
+        const { status, data } = properties;
         this.status = status;
-        this.data = data;
+        this.data = data; 
     }
 
     getData() {
@@ -17,10 +17,12 @@ class Twitter {
 
     getTrendData() {
         const trends = this.getTrends();
+
         let trendsData = []
         for (let index = 0; index < trends.length; index++) {
             trendsData.push(trends[index].data) 
         }
+
         return trendsData;
     }
 
@@ -142,6 +144,27 @@ class Twitter {
     getConfig(){
         return this.setConfig();
     }
+
+
+    toNumberCount(array = []) {
+        
+        const to = array.map( arr => {
+            return parseInt(arr['tweet_count'].slice(0, -1))
+        } );
+
+        return to;
+    }
+
+
+    /**
+     * 
+     * @param {*} trends trends aray with inside of {name, tweet_count}
+     */
+    toConfigAble(trends = Array()){
+
+    }
+
+
 }
 
 
