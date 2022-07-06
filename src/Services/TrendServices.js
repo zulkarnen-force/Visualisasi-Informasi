@@ -7,7 +7,7 @@ class TrendServices {
     
     async requset() {
         try {
-            const response = await axios.get(process.env.TREND_INDONESIA);
+            const response = await axios.get('https://api-twitter-trends.herokuapp.com/trends?location=indonesia');
             return response.data;
         } catch(e) {
             throw e;
