@@ -2,14 +2,19 @@
 
 <div class="container-fluid  mt-5  text-center d-flex align-items-center justify-content-center">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4 mt-2">
             <form action="/trends" method="get">
                 <button class="btn btn-primary">Go Trends</button>
             </form>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4 mt-2">
             <form action="/trends/today" method="get">
                 <button class="btn btn-success">Trends Today</button>
+            </form>
+        </div>
+        <div class="col-md-4 mt-2">
+            <form action="/trends/verbose" method="get">
+                <button class="btn btn-danger">Trends Verbose</button>
             </form>
         </div>
     </div>

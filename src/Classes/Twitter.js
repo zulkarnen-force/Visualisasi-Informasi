@@ -2,8 +2,10 @@ class Twitter {
 
     constructor (properties = Twitter) {
         const { status, data } = properties;
+       
         this.status = status;
         this.data = data; 
+
     }
 
     getData() {
@@ -12,6 +14,7 @@ class Twitter {
 
 
     getTrends() {
+        console.log(this.data.trends)
         return this.data.trends;
     }
 

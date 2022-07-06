@@ -5,6 +5,10 @@ const WeatherServices = require('./Services/WeatherService');
 const Weather = require('./Classes/Weather');
 const TwitterService = require('./Services/TwitterServices');
 const Twitter = require('./Classes/Twitter');
+const { json } = require('express');
+const TrendServices = require('./Services/TrendServices');
+const { rmSync } = require('fs');
+const Trend = require('./Classes/Trend');
 
 
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -52,15 +56,19 @@ app.get('/trends', async (req, res) => {
 })
 
 
+app.get('/trends/verbose', async (req, res) => {
+    const trendsService = new TrendServices();
+    const response = await trendsService.requset();
+    const trend = new Trend(response)
+    res.render('trends', {'trends':'', 'config': JSON.stringify(trend.getConfig())});
+})
+
 app.get('/trends/today', async (req, res) => {
     const services = new TwitterService();
-    
     const datas = await services.sendRequest();
-    console.log(`Datas ${datas}`)
     const twitter = new Twitter(datas);
     const trendFresh = twitter.getNewTren();
     const config = twitter.getConfigTrend(trendFresh.data);
-    console.log(`Config ${config}`)
     res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(config)})
 })
 
