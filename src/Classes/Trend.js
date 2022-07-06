@@ -31,7 +31,7 @@ class Trend {
         
             trendData.map(function (value) {
                 tweets.push(value['name']);
-                counts.push( this.toNumber(value['tweet_count']));
+                counts.push( this.#toNumber(value['tweet_count']));
             }, this)
           
         }
