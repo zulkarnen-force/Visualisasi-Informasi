@@ -64,4 +64,4 @@ app.get('/trends/today', async (req, res) => {
     res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(config)})
 })
 
-app.listen(process.env.PORT, () => console.log('listen on'))
+app.listen(process.env.PORT, () => console.log('listen on port ' + process.env.PORT))

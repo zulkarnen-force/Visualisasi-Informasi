@@ -2,12 +2,14 @@ class Weather {
     constructor (properties) {
 
         let {current_condition, nearest_area, request, weather} = properties;
+        
         this.weather = weather;
         this.currentCondition = current_condition;
 
     }
 
     getWeather() {
+        console.info('getWeather()')
         return this.weather;
         
     }

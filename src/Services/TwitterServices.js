@@ -5,7 +5,7 @@ class TwitterService {
 
     async sendRequest() {
         try {
-            let result = await axios.get(process.env.TREND_INDONESIA)
+            let result = await axios.get("https://api-twitter-trends.herokuapp.com/trends?location=indonesia")
             return result.data;
         } catch(why) {
             console.log(`[x_x Error] ${why.message}`)
