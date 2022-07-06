@@ -9,13 +9,11 @@ class Weather {
     }
 
     getWeather() {
-        console.info('getWeather()')
         return this.weather;
         
     }
 
     getCurrent() {
-        console.log(this.currentCondition)
         return this.currentCondition;
     }
 

@@ -64,6 +64,7 @@ app.get('/trends/verbose', async (req, res) => {
 })
 
 app.get('/trends/today', async (req, res) => {
+    console.log(process.env.BASE_URL)
     const services = new TwitterService();
     const datas = await services.sendRequest();
     const twitter = new Twitter(datas);

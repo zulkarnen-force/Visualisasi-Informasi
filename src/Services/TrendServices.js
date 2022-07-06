@@ -1,5 +1,4 @@
 const { default: axios } = require("axios");
-const e = require("express");
 
 class TrendServices {
     constructor() {
@@ -8,7 +7,7 @@ class TrendServices {
     
     async requset() {
         try {
-            const response = await axios.get('https://api-twitter-trends.herokuapp.com/trends?location=indonesia');
+            const response = await axios.get(process.env.TREND_INDONESIA);
             return response.data;
         } catch(e) {
             throw e;

@@ -14,7 +14,6 @@ class Twitter {
 
 
     getTrends() {
-        console.log(this.data.trends)
         return this.data.trends;
     }
 
