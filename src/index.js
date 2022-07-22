@@ -19,12 +19,7 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', async (req, res) => {
-    // const weatherService = new WeatherServices();
-    // const result = await weatherService.getByCity('Bantul');
-    // const weather = new Weather(result);
-    // res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
     res.render('welcome')
-    // return res.json({"json":"json"})
 })
 
 
@@ -47,30 +42,30 @@ app.get('/current', async (req, res) => {
 })
 
 
-app.get('/trends', async (req, res) => {
-    const services = new TwitterService();
-    const datas = await services.sendRequest();
-    const twitter = new Twitter(datas);
-    const trendFresh = twitter.getNewTren()
-    res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(twitter.getConfig())})
-})
+// app.get('/trends', async (req, res) => {
+//     const services = new TwitterService();
+//     const datas = await services.sendRequest();
+//     const twitter = new Twitter(datas);
+//     const trendFresh = twitter.getNewTren()
+//     res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(twitter.getConfig())})
+// })
 
 
-app.get('/trends/verbose', async (req, res) => {
-    const trendsService = new TrendServices();
-    const response = await trendsService.requset();
-    const trend = new Trend(response)
-    res.render('trends', {'trends':'', 'config': JSON.stringify(trend.getConfig())});
-})
+// app.get('/trends/verbose', async (req, res) => {
+//     const trendsService = new TrendServices();
+//     const response = await trendsService.requset();
+//     const trend = new Trend(response)
+//     res.render('trends', {'trends':'', 'config': JSON.stringify(trend.getConfig())});
+// })
 
-app.get('/trends/today', async (req, res) => {
-    console.log(process.env.BASE_URL)
-    const services = new TwitterService();
-    const datas = await services.sendRequest();
-    const twitter = new Twitter(datas);
-    const trendFresh = twitter.getNewTren();
-    const config = twitter.getConfigTrend(trendFresh.data);
-    res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(config)})
-})
+// app.get('/trends/today', async (req, res) => {
+//     console.log(process.env.BASE_URL)
+//     const services = new TwitterService();
+//     const datas = await services.sendRequest();
+//     const twitter = new Twitter(datas);
+//     const trendFresh = twitter.getNewTren();
+//     const config = twitter.getConfigTrend(trendFresh.data);
+//     res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(config)})
+// })
 
 app.listen(process.env.PORT, () => console.log('listen on port ' + process.env.PORT))
