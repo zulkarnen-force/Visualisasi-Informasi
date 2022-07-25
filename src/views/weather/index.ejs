@@ -1,5 +1,5 @@
 <%- include('../layouts/header.ejs')  %> 
-<%= areas %> 
+
 <form action="/weather" method="GET">
     <label for="city">Choose a City:</label>
 
@@ -14,12 +14,12 @@
 </form>
 
 <% if (config !== undefined) { %>
-    <%= JSON.stringify(config) %> 
+    <div>
+        <canvas id="myChart"></canvas>
+    </div> 
 <% } %>
 
-<div>
-    <canvas id="myChart"></canvas>
-</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 
