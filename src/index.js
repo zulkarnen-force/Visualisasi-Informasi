@@ -26,6 +26,9 @@ app.get('/weather', async (req, res) => {
     console.info("id", id)
     console.error(id === undefined)
     const weatherService = new WeatherServices();
+   
+    const cityName =  await weatherService.getCityName(id);
+    console.log("CITY NAME", cityName)
     const areas = await weatherService.getAreasDiy()
     if (id === undefined) {
         res.render('./weather/index', {areas, config: undefined})
@@ -33,7 +36,8 @@ app.get('/weather', async (req, res) => {
         const city = await weatherService.getByCode(id)
         const weather = new Weather();
         weather.setData(city)
-        res.render('./weather/index', {areas, config: weather.setConfig()})
+        weather.city = cityName
+        res.render('./weather/index', {areas, cityName, config: weather.setConfig()})
     }
     
     

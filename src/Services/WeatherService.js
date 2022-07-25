@@ -48,6 +48,18 @@ class WeatherServices {
     }
 
 
+    async getCityName(code) {
+        try {
+            const datas = await axios.get(`${this.URL}wilayah.json`);
+            const wilayah = datas.data;
+            const codeData = wilayah.filter( v => v.id === code);
+            return codeData[0].kota;
+        } catch (err) {
+            return err;
+        }
+    }
+
+
     async getByCity(city) {
         try {
             const datas = await axios.get(`${URL}`);

@@ -4,13 +4,14 @@ class Weather {
         this.celcius = []
         this.fahrenheit = []
         this.hours = []
-
+        this.city = ""
     }
 
 
     setData(data) {
         console.info('data', data)
         this.data = data
+        console.log(data)
         this.parseDatas()
     }
 
@@ -53,7 +54,7 @@ class Weather {
                 labels : this.hours,
                 // labels: this.getLabel(),
                 datasets: [{
-                label: 'Suhu Udara Sleman',
+                label: this.city,
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: this.celcius
