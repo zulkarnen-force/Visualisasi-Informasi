@@ -5,9 +5,7 @@ const WeatherServices = require('./Services/WeatherService');
 const Weather = require('./Classes/Weather');
 const TwitterService = require('./Services/TwitterServices');
 const Twitter = require('./Classes/Twitter');
-const { json } = require('express');
 const TrendServices = require('./Services/TrendServices');
-const { rmSync } = require('fs');
 const Trend = require('./Classes/Trend');
 
 
@@ -24,12 +22,23 @@ app.get('/', async (req, res) => {
 
 
 app.get('/weather', async (req, res) => {
-    const city = req.query.city 
+    const id = req.query.id 
+    console.info("id", id)
+    console.error(id === undefined)
     const weatherService = new WeatherServices();
-    const result = await weatherService.getByCity(city);
-    const weather = new Weather(result);
-    res.render('index', {'data': weather.getHourly(), 'config': weather.setConfig()})
+    const areas = await weatherService.getAreasDiy()
+    if (id === undefined) {
+        res.render('./weather/index', {areas, config: undefined})
+    } else {
+        const city = await weatherService.getByCode(id)
+        const weather = new Weather();
+        weather.setData(city)
+        res.render('./weather/index', {areas, config: weather.setConfig()})
+    }
+    
+    
 })
+
 
 app.get('/current', async (req, res) => {
     const city = req.query.city
@@ -41,6 +50,24 @@ app.get('/current', async (req, res) => {
     res.render('current', {'current': JSON.stringify(weather.getCurrent()), city, time});
 })
 
+app.get('/sorry', (req, res) => {
+    res.render('./layouts/sorry');
+})
+
+// app.get('/test', async(req, res) => {
+//         const id = req.query.id 
+//         if (id === undefined) {
+//             const weatherService = new WeatherServices();
+//             // const result = await weatherService.getByCity(city);
+//             const areas = await weatherService.getAreas()
+//             // const weather = new Weather(data.data);
+//             let DIYogya = areas.filter( v => v.propinsi === "DIYogyakarta")
+//         }  
+        
+        
+//         // res.json(DIYogyakarta)
+//         res.render('./weather/index', {DIYogya})
+// })
 
 // app.get('/trends', async (req, res) => {
 //     const services = new TwitterService();

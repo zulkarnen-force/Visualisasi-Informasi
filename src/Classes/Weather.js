@@ -1,16 +1,33 @@
 class Weather {
-    constructor (properties) {
-
-        let {current_condition, nearest_area, request, weather} = properties;
-        
-        this.weather = weather;
-        this.currentCondition = current_condition;
+    constructor () {
+        this.data = []
+        this.celcius = []
+        this.fahrenheit = []
+        this.hours = []
 
     }
 
+
+    setData(data) {
+        console.info('data', data)
+        this.data = data
+        this.parseDatas()
+    }
+
+    parseDatas(datas = []) {
+        for (const iterator of this.data) {
+            this.celcius.push(iterator['tempC'])
+            this.hours.push(iterator['jamCuaca'])
+        }
+    }
+
+
+
+
+
+
     getWeather() {
         return this.weather;
-        
     }
 
     getCurrent() {
@@ -33,12 +50,14 @@ class Weather {
         return {
             type:'line',
             data: {
-                labels: this.getLabel(),
+                labels : this.hours,
+                // labels: this.getLabel(),
                 datasets: [{
                 label: 'Suhu Udara Sleman',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: this.getCelciusHours(),
+                data: this.celcius
+                // data: this.getCelciusHours(),
             }]},
             options: {
                 scales: {
