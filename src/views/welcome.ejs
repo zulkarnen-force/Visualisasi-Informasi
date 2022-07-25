@@ -1,26 +1,27 @@
-<%- include('./header.ejs') %>
+<%- include('./layouts/header.ejs') %>
 
-<div class="container-fluid  mt-5  text-center d-flex align-items-center justify-content-center">
+<div class="container">
     <div class="row">
-        <div class="col-md-4 mt-2">
-            <form action="/trends" method="get">
-                <button class="btn btn-primary">Go Trends</button>
-            </form>
+        <h1 class=" d-flex justify-content-center">Project Previews</h1>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+        <div class="col">
+            <h2 class="d-flex justify-content-center">Weather</h2>
+            <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="/weather" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
         </div>
-        <div class="col-md-4 mt-2">
-            <form action="/trends/today" method="get">
-                <button class="btn btn-success">Trends Today</button>
-            </form>
-        </div>
-        <div class="col-md-4 mt-2">
-            <form action="/trends/verbose" method="get">
-                <button class="btn btn-danger">Trends Verbose</button>
-            </form>
+        <div class="col d-flex justify-content-center">
+            <h2>Covid</h2>
         </div>
     </div>
 </div>
 
 
-
-
-<%- include('./footer.ejs') %>
+<%- include('./layouts/footer.ejs') %>
