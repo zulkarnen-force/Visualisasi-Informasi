@@ -1,17 +1,23 @@
 <%- include('../layouts/header.ejs')  %> 
 
-<form action="/weather" method="GET">
-    <label for="city">Choose a City:</label>
 
-    <select id="city" name="id">
-        <option value="501186">--Please choose an option--</option>
-        <% areas.forEach(area => { %>
-            <option value="<%= area.id %>"><%= area.kota %></option>
-        <% }) %>
-    </select>
+<div class="container">
+    <div class="row text-center my-4">
+        <form action="/weather" method="GET">
+            <label for="city">Choose a City:</label>
+        
+            <select id="city" name="id">
+                <option value="501186">--Please choose an option--</option>
+                <% areas.forEach(area => { %>
+                    <option value="<%= area.id %>"><%= area.kota %></option>
+                <% }) %>
+            </select>
+        
+            <button type="submit">Apply</button>
+        </form>
+    </div>
+</div>
 
-    <button type="submit">Submit</button>
-</form>
 
 <% if (config !== undefined) { %>
     <div>
