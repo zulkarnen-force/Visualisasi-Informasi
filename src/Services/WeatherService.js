@@ -1,3 +1,5 @@
+const AREAS_ENUM = require("../Enums/AreasEnum");
+
 const axios = require("axios").default;
 require('dotenv').config();
 
@@ -42,9 +44,8 @@ class WeatherServices {
 
     async getCityName(code) {
         try {
-            const datas = await axios.get(`${this.URL}wilayah.json`);
-            const wilayah = datas.data;
-            const codeData = wilayah.filter( v => v.id === code);
+            const areas = AREAS_ENUM
+            const codeData = areas.filter( v => v.id === code);
             return codeData[0].kota;
         } catch (err) {
             return err;

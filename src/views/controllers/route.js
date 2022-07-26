@@ -6,7 +6,7 @@ const Weather = require('../../Classes/Weather');
 const Covid = require('../../Classes/Covid');
 const CovidServices = require('../../Services/CovidServices');
 const { AxiosError } = require("axios");
-
+const AREAS_ENUM = require("../../Enums/AreasEnum");
 
 route.get('/', async (req, res) => {
     res.render('welcome')
@@ -15,16 +15,17 @@ route.get('/', async (req, res) => {
 
 route.get('/weather', async (req, res) => {
     let id = "501186"
-    req.query.id !== undefined ? id =  req.query.id : null
+    req.query.id !== undefined ? id = req.query.id : null
     try {
         const weatherService = new WeatherServices();
         const cityName =  await weatherService.getCityName(id);
-        const areas = await weatherService.getAreasDiy()
+        console.info(AREAS_ENUM)
         const city = await weatherService.getByCode(id)
         const weather = new Weather();
         weather.setData(city)
         weather.city = cityName;
-        res.render('./weather/index', {areas, cityName, config: weather.setConfig()})
+ 
+        res.render('./weather/index', {areas: AREAS_ENUM, cityName, config: weather.setConfig()})
     } catch(err) {
         
         if (err instanceof AxiosError) {
