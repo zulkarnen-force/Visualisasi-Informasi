@@ -1,21 +1,24 @@
 <%- include('../layouts/header.ejs')  %> 
 
 <div class="container">
-    <div class="row text-center">
-        <p>Data Terakhir <%= lastDate %> </p>
+    <div class="row text-center justify-content-center">
+        
+        <div class="col-6">
+            <p>Data Terakhir <%= lastDate %> </p>
 
         <h2 id="title" class="text-uppercase">Jumlah Kasus</h2>
 
         <form action="" method="get" id="formFilter">
-            <label for="filter">Filter By</label>
-            <select name="filter" id="filter">
-                <option hidden>choose</option>
+            <select name="filter" class="form-select form-select-sm mb-3" id="filter">
+                <option hidden>Filter By</option>
                 <option value="kasus">Semua Kasus</option>
                 <option value="dirawat">Dirawat</option>
                 <option value="sembuh">Sembuh</option>
                 <option value="meninggal">Meninggal</option>
             </select>
         </form>
+        </div>
+        
 
     </div>
 </div>
