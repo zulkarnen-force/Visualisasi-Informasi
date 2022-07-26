@@ -1,24 +1,34 @@
 <%- include('./layouts/header.ejs') %>
 
 <div class="container">
-    <div class="row">
+    <div class="row  mt-3">
         <h1 class=" d-flex justify-content-center">Project Previews</h1>
     </div>
 
-    <div class="row d-flex justify-content-center">
-        <div class="col">
-            <h2 class="d-flex justify-content-center">Weather</h2>
+    <div class="row d-flex justify-content-center mt-5">
+
+        <div class="col d-flex justify-content-center">
             <div class="card" style="width: 18rem;">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <h5 class="card-title">Weather ☀</h5>
+                  <p class="card-text">Perkiraan cuaca 3 harian di DI Yogyakarta</p>
                   <a href="/weather" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
         </div>
+
         <div class="col d-flex justify-content-center">
-            <h2>Covid</h2>
+            <div class="col d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Weather</h5>
+                      <p class="card-text">Perkiraan cuaca 3 harian di DI Yogyakarta</p>
+                      <a href="/weather" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+            </div>
         </div>
     </div>
 </div>

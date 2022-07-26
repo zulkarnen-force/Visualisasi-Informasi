@@ -3,10 +3,13 @@ const app = express();
 const path = require('path');
 const WeatherServices = require('./Services/WeatherService');
 const Weather = require('./Classes/Weather');
+const Covid = require('./Classes/Covid');
 const TwitterService = require('./Services/TwitterServices');
 const Twitter = require('./Classes/Twitter');
 const TrendServices = require('./Services/TrendServices');
 const Trend = require('./Classes/Trend');
+const CovidServices = require('./Services/CovidServices');
+const { json } = require('express');
 
 
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -41,6 +44,15 @@ app.get('/weather', async (req, res) => {
     }
     
     
+})
+
+
+app.get('/covid', async (req, res) => {
+    const covidServices =  new CovidServices();
+    const data = await covidServices.getData();
+    const covid = new Covid()
+    covid.setData(data)
+    res.render('./covid/index', {config: covid.setConfig(), lastDate:covid.getLastDate()})
 })
 
 
