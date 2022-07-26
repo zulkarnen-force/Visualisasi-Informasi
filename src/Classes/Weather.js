@@ -24,29 +24,6 @@ class Weather {
 
 
 
-
-
-
-    getWeather() {
-        return this.weather;
-    }
-
-    getCurrent() {
-        return this.currentCondition;
-    }
-
-
-    getCelciusHours () {
-        const stages = this.getHourly();;
-        let celciusPerDay = [];
-        for (const stage of stages) {
-            for (const s of stage) {
-                celciusPerDay.push(parseInt(s['tempC']))
-            }
-        }
-        return celciusPerDay;   
-    }
-
     setConfig() {
         return {
             type:'line',
@@ -114,24 +91,6 @@ class Weather {
           };
     }
 
-    getHourly() {
-        let hourly = []; 
-        const weathers = this.getWeather();
-        for (const weather of weathers) {
-            hourly.push(weather['hourly'])
-        }
-        return hourly;
-    }
-
-    getLabel() {
-        let start = 0;
-        let labelHours = [];
-        for (let i = 0; i < 24; i++) {
-            labelHours.push((start+i).toString());
-        }
-
-        return labelHours;
-    }
 }
 
 
