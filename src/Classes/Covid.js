@@ -78,7 +78,6 @@ class Covid {
                     padding: 20
                 },
                 responsive: true,
-                aspectRatio: 2,
             }
         };
     }

@@ -2,7 +2,7 @@
 
 <p>Data Terakhir <%= lastDate %> </p>
 
-<h2 id="title" class="text-uppercase">Jumlah</h2>
+<h2 id="title" class="text-uppercase">Jumlah Kasus</h2>
 
 <form action="" method="get" id="formFilter">
     <select name="filter" id="filter">
@@ -16,7 +16,12 @@
 
 <% if (config !== undefined) { %>
     <div class="container">
-        <canvas id="myChart"></canvas>
+        <div class="row">
+            <div class="col">
+                <canvas id="myChart"  style="height: 10px;"></canvas>
+            </div>
+        </div>
+        
     </div> 
 <% } %>
 
@@ -43,7 +48,7 @@
 
         if (params.get("filter")) {
             filter.value = params.get("filter")
-            title.textContent += ` ${params.get("filter")}`
+            title.textContent = `JUMLAH ${params.get("filter")}`
         } 
     })
 
