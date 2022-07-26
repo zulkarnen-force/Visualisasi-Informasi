@@ -4,12 +4,9 @@ const path = require('path');
 const WeatherServices = require('./Services/WeatherService');
 const Weather = require('./Classes/Weather');
 const Covid = require('./Classes/Covid');
-const TwitterService = require('./Services/TwitterServices');
-const Twitter = require('./Classes/Twitter');
-const TrendServices = require('./Services/TrendServices');
-const Trend = require('./Classes/Trend');
 const CovidServices = require('./Services/CovidServices');
 const { json } = require('express');
+
 
 
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -25,33 +22,35 @@ app.get('/', async (req, res) => {
 
 
 app.get('/weather', async (req, res) => {
-    const id = req.query.id 
-    console.info("id", id)
-    console.error(id === undefined)
-    const weatherService = new WeatherServices();
-   
-    const cityName =  await weatherService.getCityName(id);
-    console.log("CITY NAME", cityName)
-    const areas = await weatherService.getAreasDiy()
-    if (id === undefined) {
-        res.render('./weather/index', {areas, config: undefined})
-    } else {
+    let id = "501186"
+    req.query.id !== undefined ? id =  req.query.id : null
+    try {
+        const weatherService = new WeatherServices();
+        const cityName =  await weatherService.getCityName(id);
+        const areas = await weatherService.getAreasDiy()
         const city = await weatherService.getByCode(id)
         const weather = new Weather();
         weather.setData(city)
-        weather.city = cityName
+        weather.city = cityName;
         res.render('./weather/index', {areas, cityName, config: weather.setConfig()})
+    } catch(err) {
+        res.render('./layouts/sorry')
     }
-    
+
+
     
 })
 
 
 app.get('/covid', async (req, res) => {
+    const filter = req.query.filter
     const covidServices =  new CovidServices();
     const data = await covidServices.getData();
     const covid = new Covid()
     covid.setData(data)
+    if (filter) {
+        res.render('./covid/index', {config: covid.setConfig(filter), lastDate:covid.getLastDate()})
+    }
     res.render('./covid/index', {config: covid.setConfig(), lastDate:covid.getLastDate()})
 })
 
@@ -69,46 +68,5 @@ app.get('/current', async (req, res) => {
 app.get('/sorry', (req, res) => {
     res.render('./layouts/sorry');
 })
-
-// app.get('/test', async(req, res) => {
-//         const id = req.query.id 
-//         if (id === undefined) {
-//             const weatherService = new WeatherServices();
-//             // const result = await weatherService.getByCity(city);
-//             const areas = await weatherService.getAreas()
-//             // const weather = new Weather(data.data);
-//             let DIYogya = areas.filter( v => v.propinsi === "DIYogyakarta")
-//         }  
-        
-        
-//         // res.json(DIYogyakarta)
-//         res.render('./weather/index', {DIYogya})
-// })
-
-// app.get('/trends', async (req, res) => {
-//     const services = new TwitterService();
-//     const datas = await services.sendRequest();
-//     const twitter = new Twitter(datas);
-//     const trendFresh = twitter.getNewTren()
-//     res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(twitter.getConfig())})
-// })
-
-
-// app.get('/trends/verbose', async (req, res) => {
-//     const trendsService = new TrendServices();
-//     const response = await trendsService.requset();
-//     const trend = new Trend(response)
-//     res.render('trends', {'trends':'', 'config': JSON.stringify(trend.getConfig())});
-// })
-
-// app.get('/trends/today', async (req, res) => {
-//     console.log(process.env.BASE_URL)
-//     const services = new TwitterService();
-//     const datas = await services.sendRequest();
-//     const twitter = new Twitter(datas);
-//     const trendFresh = twitter.getNewTren();
-//     const config = twitter.getConfigTrend(trendFresh.data);
-//     res.render('trends', {'trends': twitter.getData(), 'config': JSON.stringify(config)})
-// })
 
 app.listen(process.env.PORT, () => console.log('listen on port ' + process.env.PORT))

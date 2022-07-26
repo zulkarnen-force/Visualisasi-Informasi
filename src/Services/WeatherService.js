@@ -11,22 +11,14 @@ class WeatherServices {
         try {
             const datas = await axios.get(`${this.URL}wilayah.json`);
             const wilayah = datas.data;
+            console.info("wilayah", wilayah)
             const DIYAreas = wilayah.filter( v => v.propinsi === "DIYogyakarta");
             return DIYAreas;
-        } catch (err) {
-            return err;
+        } catch ( err) {
+            console.error(err)
+            throw err;
         }
     }    
-
-    async getDefault() {
-        try {
-            const datas = await axios.get("https://ibnux.github.io/BMKG-importer/cuaca/501186.json");
-            return datas.data
-        } catch (err) {
-            return err;
-        }
-    }
-
 
     async getAreas() {
         try {
@@ -38,7 +30,7 @@ class WeatherServices {
     }
 
 
-    async getByCode(code) {
+    async getByCode(code = "501186") {
         try {
             const datas = await axios.get(`${this.URL}${code}.json`);
             return datas.data
@@ -58,25 +50,6 @@ class WeatherServices {
             return err;
         }
     }
-
-
-    async getByCity(city) {
-        try {
-            const datas = await axios.get(`${URL}`);
-            return datas.data;
-        } catch (err) {
-            return err;
-        }
-    }
-
-    async currentCondition(city = 'Bantul') {
-        try {
-            const datas = await axios.get(`https://wttr.in/${city}?format=j1&lang=id`);
-            return datas.data;
-        } catch (err) {
-            return err;
-        }
-    } 
 
 }
 

@@ -4,7 +4,7 @@ class Weather {
         this.celcius = []
         this.fahrenheit = []
         this.hours = []
-        this.city = ""
+        this.city = "Kab. Bantul"
     }
 
 
