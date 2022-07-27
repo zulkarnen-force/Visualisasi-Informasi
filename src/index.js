@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express();
 const path = require('path');
-const route = require('./views/controllers/route');
+const route = require('./controllers/route');
 
 // app.use(express.static(path.join(__dirname, 'public')));
 

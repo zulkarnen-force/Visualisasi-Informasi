@@ -6,19 +6,17 @@
 
         <div class="col-sm-6">
 
-            <form action="/weather" method="GET">
+            <form action="/weather" method="GET" id="form-filter" onchange="submit()">
                 <select id="city" name="id" class="form-select form-select-sm my-3">
                     <option value="501186">Choose a City</option>
                     <% areas.forEach(area => { %>
                         <option value="<%= area.id %>"><%= area.kota %></option>
                         <% }) %>
                     </select>
-                    
-                    <button type="submit" class="btn btn-success btn-sm rounded">Apply</button>
-                </form>
-            </div>
-
+            </form>
+            
         </div>
+    </div>
 </div>
 
 
@@ -32,13 +30,21 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 
+    function a() {
+        console.log(this)
+    }
+
     document.addEventListener("DOMContentLoaded", function ()  {
         const chart = document.querySelector('#myChart');
+        const formFilter = document.querySelector('#form-filter');
         const config = '<%- JSON.stringify(config) %>' 
+        
         const myChart = new Chart(
         document.getElementById('myChart'),
          JSON.parse(config)
         );
+
+
     })
     
 </script>

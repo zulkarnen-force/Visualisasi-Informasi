@@ -5,6 +5,7 @@ class Weather {
         this.fahrenheit = []
         this.hours = []
         this.city = "Kab. Bantul"
+        this.datetime = require('node-datetime')
     }
 
 
@@ -15,10 +16,12 @@ class Weather {
         this.parseDatas()
     }
 
-    parseDatas(datas = []) {
-        for (const iterator of this.data) {
-            this.celcius.push(iterator['tempC'])
-            this.hours.push(iterator['jamCuaca'])
+    parseDatas() {
+        for (const weather of this.data) {
+          let datetimeFormat = this.datetime.create(weather['jamCuaca'], 'd-n-Y H:M')
+          let labelDateTime = datetimeFormat.format()
+            this.celcius.push(`${weather['tempC']}`)
+            this.hours.push(labelDateTime)
         }
     }
 

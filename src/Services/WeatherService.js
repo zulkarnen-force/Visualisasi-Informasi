@@ -32,7 +32,7 @@ class WeatherServices {
     }
 
 
-    async getByCode(code = "501186") {
+    async getWeatherByCode(code = "501186") {
         try {
             const datas = await axios.get(`${this.URL}${code}.json`);
             return datas.data
@@ -42,7 +42,7 @@ class WeatherServices {
     }
 
 
-    async getCityName(code) {
+    getCityName(code) {
         try {
             const areas = AREAS_ENUM
             const codeData = areas.filter( v => v.id === code);

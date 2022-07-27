@@ -15,10 +15,6 @@ class CovidServices {
         return covidProv.data
     }
 
-
-
-
-    
 }
 
 
